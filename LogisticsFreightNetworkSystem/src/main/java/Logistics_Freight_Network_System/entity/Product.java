@@ -1,4 +1,4 @@
-package Logistics_Freight_Network_System.entities;
+package Logistics_Freight_Network_System.entity;
 
 
 import jakarta.persistence.*;
