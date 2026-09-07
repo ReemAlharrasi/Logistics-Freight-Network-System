@@ -1,18 +1,11 @@
 package Logistics_Freight_Network_System.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-/**
- * Shared base for every entity in the system.
- * - id: primary key
- * - isActive: drives soft delete (every read filters isActive = true; every delete sets it false)
- * - createdDate / updatedDate: auto-managed timestamps
- */
 @Getter
 @Setter
 @MappedSuperclass

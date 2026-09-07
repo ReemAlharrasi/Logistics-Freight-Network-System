@@ -3,6 +3,8 @@ package Logistics_Freight_Network_System.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +26,8 @@ public class TrackingEvent extends BaseClass {
     @Column(length = 255)
     private String note;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "shipment_id", nullable = false)
     private Shipment shipment;
 }

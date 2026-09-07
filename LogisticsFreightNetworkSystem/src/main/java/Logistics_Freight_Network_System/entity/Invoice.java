@@ -3,6 +3,8 @@ package Logistics_Freight_Network_System.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDate;
 
@@ -21,11 +23,13 @@ public class Invoice extends BaseClass {
     @Column(nullable = false)
     private LocalDate issuedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "shipment_id", nullable = false)
     private Shipment shipment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 }

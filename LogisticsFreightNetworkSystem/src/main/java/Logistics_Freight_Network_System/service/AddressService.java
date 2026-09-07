@@ -4,7 +4,6 @@ package Logistics_Freight_Network_System.service;
 // ---------------- AddressService ----------------
 import Logistics_Freight_Network_System.entity.Address;
 import Logistics_Freight_Network_System.entity.Customer;
-import Logistics_Freight_Network_System.entity.ServiceZone;
 import Logistics_Freight_Network_System.repository.AddressRepository;
 import Logistics_Freight_Network_System.repository.CustomerRepository;
 import Logistics_Freight_Network_System.repository.ServiceZoneRepository;

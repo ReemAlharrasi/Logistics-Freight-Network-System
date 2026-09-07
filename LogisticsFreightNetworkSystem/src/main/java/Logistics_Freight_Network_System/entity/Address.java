@@ -3,6 +3,8 @@ package Logistics_Freight_Network_System.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Getter
 @Setter
@@ -22,12 +24,13 @@ public class Address extends BaseClass {
     @Column(nullable = false, length = 60)
     private String country;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    // Optional link into a ServiceZone's coverage area
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "service_zone_id")
     private ServiceZone serviceZone;
 }
