@@ -3,44 +3,44 @@ package Logistics_Freight_Network_System.controller;
 // ---------------- InvoiceController ----------------
 import Logistics_Freight_Network_System.entity.Invoice;
 import Logistics_Freight_Network_System.service.InvoiceService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/invoices")
+@RequestMapping("invoice")
 public class InvoiceController {
 
-    private final InvoiceService invoiceService;
+    InvoiceService invoiceService;
 
+    @Autowired
     public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }
 
-    @GetMapping
-    public List<Invoice> getAll() {
-        return invoiceService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public Invoice getById(@PathVariable Long id) {
-        return invoiceService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Invoice create(@RequestBody Invoice invoice) {
+    @PostMapping("add")
+    public Invoice addInvoice(@RequestBody Invoice invoice) {
         return invoiceService.create(invoice);
     }
 
-    @PutMapping("/{id}")
-    public Invoice update(@PathVariable Long id, @RequestBody Invoice invoice) {
-        return invoiceService.update(id, invoice);
+    @GetMapping("getAll")
+    public List<Invoice> getAllInvoices() {
+        return invoiceService.getAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@PathVariable Long id) {
+    @GetMapping("getById")
+    public Invoice getById(@RequestParam Long id) {
+        return invoiceService.getById(id);
+    }
+
+    @PutMapping("update")
+    public Invoice updateInvoice(@RequestBody Invoice invoice) {
+        return invoiceService.update(invoice.getId(), invoice);
+    }
+
+    @DeleteMapping("deleteById")
+    public Boolean deleteById(@RequestParam Long id) {
         invoiceService.softDelete(id);
+        return true;
     }
 }

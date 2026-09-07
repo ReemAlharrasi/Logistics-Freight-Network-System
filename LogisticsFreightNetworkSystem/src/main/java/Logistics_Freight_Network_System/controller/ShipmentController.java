@@ -3,44 +3,44 @@ package Logistics_Freight_Network_System.controller;
 // ---------------- ShipmentController ----------------
 import Logistics_Freight_Network_System.entity.Shipment;
 import Logistics_Freight_Network_System.service.ShipmentService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/shipments")
+@RequestMapping("shipment")
 public class ShipmentController {
 
-    private final ShipmentService shipmentService;
+    ShipmentService shipmentService;
 
+    @Autowired
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
 
-    @GetMapping
-    public List<Shipment> getAll() {
-        return shipmentService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public Shipment getById(@PathVariable Long id) {
-        return shipmentService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Shipment create(@RequestBody Shipment shipment) {
+    @PostMapping("add")
+    public Shipment addShipment(@RequestBody Shipment shipment) {
         return shipmentService.create(shipment);
     }
 
-    @PutMapping("/{id}")
-    public Shipment update(@PathVariable Long id, @RequestBody Shipment shipment) {
-        return shipmentService.update(id, shipment);
+    @GetMapping("getAll")
+    public List<Shipment> getAllShipments() {
+        return shipmentService.getAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@PathVariable Long id) {
+    @GetMapping("getById")
+    public Shipment getById(@RequestParam Long id) {
+        return shipmentService.getById(id);
+    }
+
+    @PutMapping("update")
+    public Shipment updateShipment(@RequestBody Shipment shipment) {
+        return shipmentService.update(shipment.getId(), shipment);
+    }
+
+    @DeleteMapping("deleteById")
+    public Boolean deleteById(@RequestParam Long id) {
         shipmentService.softDelete(id);
+        return true;
     }
 }

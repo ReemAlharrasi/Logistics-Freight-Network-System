@@ -3,44 +3,44 @@ package Logistics_Freight_Network_System.controller;
 // ---------------- ShipmentItemController ----------------
 import Logistics_Freight_Network_System.entity.ShipmentItem;
 import Logistics_Freight_Network_System.service.ShipmentItemService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/shipment-items")
+@RequestMapping("shipmentItem")
 public class ShipmentItemController {
 
-    private final ShipmentItemService shipmentItemService;
+    ShipmentItemService shipmentItemService;
 
+    @Autowired
     public ShipmentItemController(ShipmentItemService shipmentItemService) {
         this.shipmentItemService = shipmentItemService;
     }
 
-    @GetMapping
-    public List<ShipmentItem> getAll() {
-        return shipmentItemService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public ShipmentItem getById(@PathVariable Long id) {
-        return shipmentItemService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ShipmentItem create(@RequestBody ShipmentItem shipmentItem) {
+    @PostMapping("add")
+    public ShipmentItem addShipmentItem(@RequestBody ShipmentItem shipmentItem) {
         return shipmentItemService.create(shipmentItem);
     }
 
-    @PutMapping("/{id}")
-    public ShipmentItem update(@PathVariable Long id, @RequestBody ShipmentItem shipmentItem) {
-        return shipmentItemService.update(id, shipmentItem);
+    @GetMapping("getAll")
+    public List<ShipmentItem> getAllShipmentItems() {
+        return shipmentItemService.getAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@PathVariable Long id) {
+    @GetMapping("getById")
+    public ShipmentItem getById(@RequestParam Long id) {
+        return shipmentItemService.getById(id);
+    }
+
+    @PutMapping("update")
+    public ShipmentItem updateShipmentItem(@RequestBody ShipmentItem shipmentItem) {
+        return shipmentItemService.update(shipmentItem.getId(), shipmentItem);
+    }
+
+    @DeleteMapping("deleteById")
+    public Boolean deleteById(@RequestParam Long id) {
         shipmentItemService.softDelete(id);
+        return true;
     }
 }

@@ -1,46 +1,47 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- InventoryItemController ----------------
+// ---------------- InventoryItemController ----------------
 import Logistics_Freight_Network_System.entity.InventoryItem;
 import Logistics_Freight_Network_System.service.InventoryItemService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/inventory-items")
+@RequestMapping("inventoryItem")
 public class InventoryItemController {
 
-    private final InventoryItemService inventoryItemService;
+    InventoryItemService inventoryItemService;
 
+    @Autowired
     public InventoryItemController(InventoryItemService inventoryItemService) {
         this.inventoryItemService = inventoryItemService;
     }
 
-    @GetMapping
-    public List<InventoryItem> getAll() {
-        return inventoryItemService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public InventoryItem getById(@PathVariable Long id) {
-        return inventoryItemService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public InventoryItem create(@RequestBody InventoryItem inventoryItem) {
+    @PostMapping("add")
+    public InventoryItem addInventoryItem(@RequestBody InventoryItem inventoryItem) {
         return inventoryItemService.create(inventoryItem);
     }
 
-    @PutMapping("/{id}")
-    public InventoryItem update(@PathVariable Long id, @RequestBody InventoryItem inventoryItem) {
-        return inventoryItemService.update(id, inventoryItem);
+    @GetMapping("getAll")
+    public List<InventoryItem> getAllInventoryItems() {
+        return inventoryItemService.getAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@PathVariable Long id) {
+    @GetMapping("getById")
+    public InventoryItem getById(@RequestParam Long id) {
+        return inventoryItemService.getById(id);
+    }
+
+    @PutMapping("update")
+    public InventoryItem updateInventoryItem(@RequestBody InventoryItem inventoryItem) {
+        return inventoryItemService.update(inventoryItem.getId(), inventoryItem);
+    }
+
+    @DeleteMapping("deleteById")
+    public Boolean deleteById(@RequestParam Long id) {
         inventoryItemService.softDelete(id);
+        return true;
     }
 }

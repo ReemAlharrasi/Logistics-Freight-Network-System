@@ -3,44 +3,44 @@ package Logistics_Freight_Network_System.controller;
 // ---------------- CarrierController ----------------
 import Logistics_Freight_Network_System.entity.Carrier;
 import Logistics_Freight_Network_System.service.CarrierService;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/carriers")
+@RequestMapping("carrier")
 public class CarrierController {
 
-    private final CarrierService carrierService;
+    CarrierService carrierService;
 
+    @Autowired
     public CarrierController(CarrierService carrierService) {
         this.carrierService = carrierService;
     }
 
-    @GetMapping
-    public List<Carrier> getAll() {
-        return carrierService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public Carrier getById(@PathVariable Long id) {
-        return carrierService.getById(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Carrier create(@RequestBody Carrier carrier) {
+    @PostMapping("add")
+    public Carrier addCarrier(@RequestBody Carrier carrier) {
         return carrierService.create(carrier);
     }
 
-    @PutMapping("/{id}")
-    public Carrier update(@PathVariable Long id, @RequestBody Carrier carrier) {
-        return carrierService.update(id, carrier);
+    @GetMapping("getAll")
+    public List<Carrier> getAllCarriers() {
+        return carrierService.getAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void softDelete(@PathVariable Long id) {
+    @GetMapping("getById")
+    public Carrier getById(@RequestParam Long id) {
+        return carrierService.getById(id);
+    }
+
+    @PutMapping("update")
+    public Carrier updateCarrier(@RequestBody Carrier carrier) {
+        return carrierService.update(carrier.getId(), carrier);
+    }
+
+    @DeleteMapping("deleteById")
+    public Boolean deleteById(@RequestParam Long id) {
         carrierService.softDelete(id);
+        return true;
     }
 }
