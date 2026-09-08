@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
 
-    @Query("SELECT s FROM Shipment s WHERE s.isActive=true")
+    @Query("SELECT s FROM Shipment s JOIN FETCH s.warehouse JOIN FETCH s.customer LEFT JOIN FETCH s.carrier WHERE s.isActive=true")
     List<Shipment> getAllShipments();
 
-    @Query("SELECT s FROM Shipment s WHERE s.isActive=true AND s.id=:id")
+    @Query("SELECT s FROM Shipment s JOIN FETCH s.warehouse JOIN FETCH s.customer LEFT JOIN FETCH s.carrier WHERE s.isActive=true AND s.id=:id")
     Shipment getShipmentById(@Param("id") Long id);
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
-    @Query("SELECT v FROM Vehicle v WHERE v.isActive=true")
+    @Query("SELECT v FROM Vehicle v JOIN FETCH v.carrier WHERE v.isActive=true")
     List<Vehicle> getAllVehicles();
 
-    @Query("SELECT v FROM Vehicle v WHERE v.isActive=true AND v.id=:id")
+    @Query("SELECT v FROM Vehicle v JOIN FETCH v.carrier WHERE v.isActive=true AND v.id=:id")
     Vehicle getVehicleById(@Param("id") Long id);
 }

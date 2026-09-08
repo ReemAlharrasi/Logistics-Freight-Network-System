@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface StaffRepository extends JpaRepository<Staff, Long> {
-    @Query("SELECT st FROM Staff st WHERE st.isActive=true")
+    @Query("SELECT st FROM Staff st JOIN FETCH st.warehouse WHERE st.isActive=true")
     List<Staff> getAllStaff();
 
-    @Query("SELECT st FROM Staff st WHERE st.isActive=true AND st.id=:id")
+    @Query("SELECT st FROM Staff st JOIN FETCH st.warehouse WHERE st.isActive=true AND st.id=:id")
     Staff getStaffById(@Param("id") Long id);
 }

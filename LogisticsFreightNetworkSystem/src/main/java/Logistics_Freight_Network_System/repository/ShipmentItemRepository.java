@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ShipmentItemRepository extends JpaRepository<ShipmentItem, Long> {
 
-    @Query("SELECT si FROM ShipmentItem si WHERE si.isActive=true")
+    @Query("SELECT si FROM ShipmentItem si JOIN FETCH si.shipment JOIN FETCH si.product WHERE si.isActive=true")
     List<ShipmentItem> getAllShipmentItems();
 
-    @Query("SELECT si FROM ShipmentItem si WHERE si.isActive=true AND si.id=:id")
+    @Query("SELECT si FROM ShipmentItem si JOIN FETCH si.shipment JOIN FETCH si.product WHERE si.isActive=true AND si.id=:id")
     ShipmentItem getShipmentItemById(@Param("id") Long id);
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface InventoryItemRepository extends JpaRepository<InventoryItem, Long> {
 
-    @Query("SELECT i FROM InventoryItem i WHERE i.isActive=true")
+    @Query("SELECT i FROM InventoryItem i JOIN FETCH i.warehouse JOIN FETCH i.product WHERE i.isActive=true")
     List<InventoryItem> getAllInventoryItems();
 
-    @Query("SELECT i FROM InventoryItem i WHERE i.isActive=true AND i.id=:id")
+    @Query("SELECT i FROM InventoryItem i JOIN FETCH i.warehouse JOIN FETCH i.product WHERE i.isActive=true AND i.id=:id")
     InventoryItem getInventoryItemById(@Param("id") Long id);
 }

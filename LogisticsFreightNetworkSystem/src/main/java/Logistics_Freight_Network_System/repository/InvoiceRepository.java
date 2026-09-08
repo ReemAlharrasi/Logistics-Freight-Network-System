@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
-    @Query("SELECT inv FROM Invoice inv WHERE inv.isActive=true")
+    @Query("SELECT inv FROM Invoice inv JOIN FETCH inv.shipment JOIN FETCH inv.customer WHERE inv.isActive=true")
     List<Invoice> getAllInvoices();
 
-    @Query("SELECT inv FROM Invoice inv WHERE inv.isActive=true AND inv.id=:id")
+    @Query("SELECT inv FROM Invoice inv JOIN FETCH inv.shipment JOIN FETCH inv.customer WHERE inv.isActive=true AND inv.id=:id")
     Invoice getInvoiceById(@Param("id") Long id);
 }

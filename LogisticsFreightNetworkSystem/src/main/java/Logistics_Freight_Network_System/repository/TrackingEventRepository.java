@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TrackingEventRepository extends JpaRepository<TrackingEvent, Long> {
-    @Query("SELECT t FROM TrackingEvent t WHERE t.isActive=true")
+    @Query("SELECT t FROM TrackingEvent t JOIN FETCH t.shipment WHERE t.isActive=true")
     List<TrackingEvent> getAllTrackingEvents();
 
-    @Query("SELECT t FROM TrackingEvent t WHERE t.isActive=true AND t.id=:id")
+    @Query("SELECT t FROM TrackingEvent t JOIN FETCH t.shipment WHERE t.isActive=true AND t.id=:id")
     TrackingEvent getTrackingEventById(@Param("id") Long id);
 }

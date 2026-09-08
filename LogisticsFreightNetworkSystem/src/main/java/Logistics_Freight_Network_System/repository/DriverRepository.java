@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DriverRepository extends JpaRepository<Driver, Long> {
-    @Query("SELECT d FROM Driver d WHERE d.isActive=true")
+    @Query("SELECT d FROM Driver d JOIN FETCH d.carrier WHERE d.isActive=true")
     List<Driver> getAllDrivers();
 
-    @Query("SELECT d FROM Driver d WHERE d.isActive=true AND d.id=:id")
+    @Query("SELECT d FROM Driver d JOIN FETCH d.carrier WHERE d.isActive=true AND d.id=:id")
     Driver getDriverById(@Param("id") Long id);
 }
