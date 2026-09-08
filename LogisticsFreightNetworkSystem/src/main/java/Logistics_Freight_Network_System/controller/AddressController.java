@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- AddressController ----------------
+import Logistics_Freight_Network_System.dto.AddressDTO;
 import Logistics_Freight_Network_System.entity.Address;
 import Logistics_Freight_Network_System.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class AddressController {
     }
 
     @PostMapping("add")
-    public Address addAddress(@RequestBody Address address) {
-        return addressService.create(address);
+    public AddressDTO addAddress(@RequestBody Address address) {
+        return AddressDTO.convertToDTO(addressService.create(address));
     }
 
     @GetMapping("getAll")
-    public List<Address> getAllAddresses() {
-        return addressService.getAll();
+    public List<AddressDTO> getAllAddresses() {
+        return AddressDTO.convertToDTO(addressService.getAll());
     }
 
     @GetMapping("getById")
-    public Address getById(@RequestParam Long id) {
-        return addressService.getById(id);
+    public AddressDTO getById(@RequestParam Long id) {
+        return AddressDTO.convertToDTO(addressService.getById(id));
     }
 
     @PutMapping("update")
-    public Address updateAddress(@RequestBody Address address) {
-        return addressService.update(address.getId(), address);
+    public AddressDTO updateAddress(@RequestBody Address address) {
+        return AddressDTO.convertToDTO(addressService.update(address.getId(), address));
     }
 
     @DeleteMapping("deleteById")

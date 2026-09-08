@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- ServiceZoneController ----------------
+import Logistics_Freight_Network_System.dto.ServiceZoneDTO;
 import Logistics_Freight_Network_System.entity.ServiceZone;
 import Logistics_Freight_Network_System.service.ServiceZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class ServiceZoneController {
     }
 
     @PostMapping("add")
-    public ServiceZone addServiceZone(@RequestBody ServiceZone serviceZone) {
-        return serviceZoneService.create(serviceZone);
+    public ServiceZoneDTO addServiceZone(@RequestBody ServiceZone serviceZone) {
+        return ServiceZoneDTO.convertToDTO(serviceZoneService.create(serviceZone));
     }
 
     @GetMapping("getAll")
-    public List<ServiceZone> getAllServiceZones() {
-        return serviceZoneService.getAll();
+    public List<ServiceZoneDTO> getAllServiceZones() {
+        return ServiceZoneDTO.convertToDTO(serviceZoneService.getAll());
     }
 
     @GetMapping("getById")
-    public ServiceZone getById(@RequestParam Long id) {
-        return serviceZoneService.getById(id);
+    public ServiceZoneDTO getById(@RequestParam Long id) {
+        return ServiceZoneDTO.convertToDTO(serviceZoneService.getById(id));
     }
 
     @PutMapping("update")
-    public ServiceZone updateServiceZone(@RequestBody ServiceZone serviceZone) {
-        return serviceZoneService.update(serviceZone.getId(), serviceZone);
+    public ServiceZoneDTO updateServiceZone(@RequestBody ServiceZone serviceZone) {
+        return ServiceZoneDTO.convertToDTO(serviceZoneService.update(serviceZone.getId(), serviceZone));
     }
 
     @DeleteMapping("deleteById")

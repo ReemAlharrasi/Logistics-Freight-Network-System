@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- CustomerController ----------------
+import Logistics_Freight_Network_System.dto.CustomerDTO;
 import Logistics_Freight_Network_System.entity.Customer;
 import Logistics_Freight_Network_System.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class CustomerController {
     }
 
     @PostMapping("add")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        return customerService.create(customer);
+    public CustomerDTO addCustomer(@RequestBody Customer customer) {
+        return CustomerDTO.convertToDTO(customerService.create(customer));
     }
 
     @GetMapping("getAll")
-    public List<Customer> getAllCustomers() {
-        return customerService.getAll();
+    public List<CustomerDTO> getAllCustomers() {
+        return CustomerDTO.convertToDTO(customerService.getAll());
     }
 
     @GetMapping("getById")
-    public Customer getById(@RequestParam Long id) {
-        return customerService.getById(id);
+    public CustomerDTO getById(@RequestParam Long id) {
+        return CustomerDTO.convertToDTO(customerService.getById(id));
     }
 
     @PutMapping("update")
-    public Customer updateCustomer(@RequestBody Customer customer) {
-        return customerService.update(customer.getId(), customer);
+    public CustomerDTO updateCustomer(@RequestBody Customer customer) {
+        return CustomerDTO.convertToDTO(customerService.update(customer.getId(), customer));
     }
 
     @DeleteMapping("deleteById")

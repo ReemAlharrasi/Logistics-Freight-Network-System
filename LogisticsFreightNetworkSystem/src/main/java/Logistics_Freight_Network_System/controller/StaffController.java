@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- StaffController ----------------
+import Logistics_Freight_Network_System.dto.StaffDTO;
 import Logistics_Freight_Network_System.entity.Staff;
 import Logistics_Freight_Network_System.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class StaffController {
     }
 
     @PostMapping("add")
-    public Staff addStaff(@RequestBody Staff staff) {
-        return staffService.create(staff);
+    public StaffDTO addStaff(@RequestBody Staff staff) {
+        return StaffDTO.convertToDTO(staffService.create(staff));
     }
 
     @GetMapping("getAll")
-    public List<Staff> getAllStaff() {
-        return staffService.getAll();
+    public List<StaffDTO> getAllStaff() {
+        return StaffDTO.convertToDTO(staffService.getAll());
     }
 
     @GetMapping("getById")
-    public Staff getById(@RequestParam Long id) {
-        return staffService.getById(id);
+    public StaffDTO getById(@RequestParam Long id) {
+        return StaffDTO.convertToDTO(staffService.getById(id));
     }
 
     @PutMapping("update")
-    public Staff updateStaff(@RequestBody Staff staff) {
-        return staffService.update(staff.getId(), staff);
+    public StaffDTO updateStaff(@RequestBody Staff staff) {
+        return StaffDTO.convertToDTO(staffService.update(staff.getId(), staff));
     }
 
     @DeleteMapping("deleteById")

@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
-// ---------------- InvoiceController ----------------
+/// ---------------- InvoiceController ----------------
+import Logistics_Freight_Network_System.dto.InvoiceDTO;
 import Logistics_Freight_Network_System.entity.Invoice;
 import Logistics_Freight_Network_System.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class InvoiceController {
     }
 
     @PostMapping("add")
-    public Invoice addInvoice(@RequestBody Invoice invoice) {
-        return invoiceService.create(invoice);
+    public InvoiceDTO addInvoice(@RequestBody Invoice invoice) {
+        return InvoiceDTO.convertToDTO(invoiceService.create(invoice));
     }
 
     @GetMapping("getAll")
-    public List<Invoice> getAllInvoices() {
-        return invoiceService.getAll();
+    public List<InvoiceDTO> getAllInvoices() {
+        return InvoiceDTO.convertToDTO(invoiceService.getAll());
     }
 
     @GetMapping("getById")
-    public Invoice getById(@RequestParam Long id) {
-        return invoiceService.getById(id);
+    public InvoiceDTO getById(@RequestParam Long id) {
+        return InvoiceDTO.convertToDTO(invoiceService.getById(id));
     }
 
     @PutMapping("update")
-    public Invoice updateInvoice(@RequestBody Invoice invoice) {
-        return invoiceService.update(invoice.getId(), invoice);
+    public InvoiceDTO updateInvoice(@RequestBody Invoice invoice) {
+        return InvoiceDTO.convertToDTO(invoiceService.update(invoice.getId(), invoice));
     }
 
     @DeleteMapping("deleteById")

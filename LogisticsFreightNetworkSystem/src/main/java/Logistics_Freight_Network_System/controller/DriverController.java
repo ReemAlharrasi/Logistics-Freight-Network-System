@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- DriverController ----------------
+import Logistics_Freight_Network_System.dto.DriverDTO;
 import Logistics_Freight_Network_System.entity.Driver;
 import Logistics_Freight_Network_System.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class DriverController {
     }
 
     @PostMapping("add")
-    public Driver addDriver(@RequestBody Driver driver) {
-        return driverService.create(driver);
+    public DriverDTO addDriver(@RequestBody Driver driver) {
+        return DriverDTO.convertToDTO(driverService.create(driver));
     }
 
     @GetMapping("getAll")
-    public List<Driver> getAllDrivers() {
-        return driverService.getAll();
+    public List<DriverDTO> getAllDrivers() {
+        return DriverDTO.convertToDTO(driverService.getAll());
     }
 
     @GetMapping("getById")
-    public Driver getById(@RequestParam Long id) {
-        return driverService.getById(id);
+    public DriverDTO getById(@RequestParam Long id) {
+        return DriverDTO.convertToDTO(driverService.getById(id));
     }
 
     @PutMapping("update")
-    public Driver updateDriver(@RequestBody Driver driver) {
-        return driverService.update(driver.getId(), driver);
+    public DriverDTO updateDriver(@RequestBody Driver driver) {
+        return DriverDTO.convertToDTO(driverService.update(driver.getId(), driver));
     }
 
     @DeleteMapping("deleteById")

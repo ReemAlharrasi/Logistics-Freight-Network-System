@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- ShipmentItemController ----------------
+import Logistics_Freight_Network_System.dto.ShipmentItemDTO;
 import Logistics_Freight_Network_System.entity.ShipmentItem;
 import Logistics_Freight_Network_System.service.ShipmentItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class ShipmentItemController {
     }
 
     @PostMapping("add")
-    public ShipmentItem addShipmentItem(@RequestBody ShipmentItem shipmentItem) {
-        return shipmentItemService.create(shipmentItem);
+    public ShipmentItemDTO addShipmentItem(@RequestBody ShipmentItem shipmentItem) {
+        return ShipmentItemDTO.convertToDTO(shipmentItemService.create(shipmentItem));
     }
 
     @GetMapping("getAll")
-    public List<ShipmentItem> getAllShipmentItems() {
-        return shipmentItemService.getAll();
+    public List<ShipmentItemDTO> getAllShipmentItems() {
+        return ShipmentItemDTO.convertToDTO(shipmentItemService.getAll());
     }
 
     @GetMapping("getById")
-    public ShipmentItem getById(@RequestParam Long id) {
-        return shipmentItemService.getById(id);
+    public ShipmentItemDTO getById(@RequestParam Long id) {
+        return ShipmentItemDTO.convertToDTO(shipmentItemService.getById(id));
     }
 
     @PutMapping("update")
-    public ShipmentItem updateShipmentItem(@RequestBody ShipmentItem shipmentItem) {
-        return shipmentItemService.update(shipmentItem.getId(), shipmentItem);
+    public ShipmentItemDTO updateShipmentItem(@RequestBody ShipmentItem shipmentItem) {
+        return ShipmentItemDTO.convertToDTO(shipmentItemService.update(shipmentItem.getId(), shipmentItem));
     }
 
     @DeleteMapping("deleteById")

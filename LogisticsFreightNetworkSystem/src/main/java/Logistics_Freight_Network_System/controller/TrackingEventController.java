@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- TrackingEventController ----------------
+import Logistics_Freight_Network_System.dto.TrackingEventDTO;
 import Logistics_Freight_Network_System.entity.TrackingEvent;
 import Logistics_Freight_Network_System.service.TrackingEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class TrackingEventController {
     }
 
     @PostMapping("add")
-    public TrackingEvent addTrackingEvent(@RequestBody TrackingEvent trackingEvent) {
-        return trackingEventService.create(trackingEvent);
+    public TrackingEventDTO addTrackingEvent(@RequestBody TrackingEvent trackingEvent) {
+        return TrackingEventDTO.convertToDTO(trackingEventService.create(trackingEvent));
     }
 
     @GetMapping("getAll")
-    public List<TrackingEvent> getAllTrackingEvents() {
-        return trackingEventService.getAll();
+    public List<TrackingEventDTO> getAllTrackingEvents() {
+        return TrackingEventDTO.convertToDTO(trackingEventService.getAll());
     }
 
     @GetMapping("getById")
-    public TrackingEvent getById(@RequestParam Long id) {
-        return trackingEventService.getById(id);
+    public TrackingEventDTO getById(@RequestParam Long id) {
+        return TrackingEventDTO.convertToDTO(trackingEventService.getById(id));
     }
 
     @PutMapping("update")
-    public TrackingEvent updateTrackingEvent(@RequestBody TrackingEvent trackingEvent) {
-        return trackingEventService.update(trackingEvent.getId(), trackingEvent);
+    public TrackingEventDTO updateTrackingEvent(@RequestBody TrackingEvent trackingEvent) {
+        return TrackingEventDTO.convertToDTO(trackingEventService.update(trackingEvent.getId(), trackingEvent));
     }
 
     @DeleteMapping("deleteById")

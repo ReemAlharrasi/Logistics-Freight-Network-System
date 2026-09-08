@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- CarrierController ----------------
+import Logistics_Freight_Network_System.dto.CarrierDTO;
 import Logistics_Freight_Network_System.entity.Carrier;
 import Logistics_Freight_Network_System.service.CarrierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class CarrierController {
     }
 
     @PostMapping("add")
-    public Carrier addCarrier(@RequestBody Carrier carrier) {
-        return carrierService.create(carrier);
+    public CarrierDTO addCarrier(@RequestBody Carrier carrier) {
+        return CarrierDTO.convertToDTO(carrierService.create(carrier));
     }
 
     @GetMapping("getAll")
-    public List<Carrier> getAllCarriers() {
-        return carrierService.getAll();
+    public List<CarrierDTO> getAllCarriers() {
+        return CarrierDTO.convertToDTO(carrierService.getAll());
     }
 
     @GetMapping("getById")
-    public Carrier getById(@RequestParam Long id) {
-        return carrierService.getById(id);
+    public CarrierDTO getById(@RequestParam Long id) {
+        return CarrierDTO.convertToDTO(carrierService.getById(id));
     }
 
     @PutMapping("update")
-    public Carrier updateCarrier(@RequestBody Carrier carrier) {
-        return carrierService.update(carrier.getId(), carrier);
+    public CarrierDTO updateCarrier(@RequestBody Carrier carrier) {
+        return CarrierDTO.convertToDTO(carrierService.update(carrier.getId(), carrier));
     }
 
     @DeleteMapping("deleteById")

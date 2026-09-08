@@ -1,6 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- VehicleController ----------------
+import Logistics_Freight_Network_System.dto.VehicleDTO;
 import Logistics_Freight_Network_System.entity.Vehicle;
 import Logistics_Freight_Network_System.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,23 @@ public class VehicleController {
     }
 
     @PostMapping("add")
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.create(vehicle);
+    public VehicleDTO addVehicle(@RequestBody Vehicle vehicle) {
+        return VehicleDTO.convertToDTO(vehicleService.create(vehicle));
     }
 
     @GetMapping("getAll")
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAll();
+    public List<VehicleDTO> getAllVehicles() {
+        return VehicleDTO.convertToDTO(vehicleService.getAll());
     }
 
     @GetMapping("getById")
-    public Vehicle getById(@RequestParam Long id) {
-        return vehicleService.getById(id);
+    public VehicleDTO getById(@RequestParam Long id) {
+        return VehicleDTO.convertToDTO(vehicleService.getById(id));
     }
 
     @PutMapping("update")
-    public Vehicle updateVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.update(vehicle.getId(), vehicle);
+    public VehicleDTO updateVehicle(@RequestBody Vehicle vehicle) {
+        return VehicleDTO.convertToDTO(vehicleService.update(vehicle.getId(), vehicle));
     }
 
     @DeleteMapping("deleteById")

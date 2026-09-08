@@ -1,7 +1,7 @@
 package Logistics_Freight_Network_System.controller;
 
 // ---------------- InventoryItemController ----------------
-// ---------------- InventoryItemController ----------------
+import Logistics_Freight_Network_System.dto.InventoryItemDTO;
 import Logistics_Freight_Network_System.entity.InventoryItem;
 import Logistics_Freight_Network_System.service.InventoryItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ public class InventoryItemController {
     }
 
     @PostMapping("add")
-    public InventoryItem addInventoryItem(@RequestBody InventoryItem inventoryItem) {
-        return inventoryItemService.create(inventoryItem);
+    public InventoryItemDTO addInventoryItem(@RequestBody InventoryItem inventoryItem) {
+        return InventoryItemDTO.convertToDTO(inventoryItemService.create(inventoryItem));
     }
 
     @GetMapping("getAll")
-    public List<InventoryItem> getAllInventoryItems() {
-        return inventoryItemService.getAll();
+    public List<InventoryItemDTO> getAllInventoryItems() {
+        return InventoryItemDTO.convertToDTO(inventoryItemService.getAll());
     }
 
     @GetMapping("getById")
-    public InventoryItem getById(@RequestParam Long id) {
-        return inventoryItemService.getById(id);
+    public InventoryItemDTO getById(@RequestParam Long id) {
+        return InventoryItemDTO.convertToDTO(inventoryItemService.getById(id));
     }
 
     @PutMapping("update")
-    public InventoryItem updateInventoryItem(@RequestBody InventoryItem inventoryItem) {
-        return inventoryItemService.update(inventoryItem.getId(), inventoryItem);
+    public InventoryItemDTO updateInventoryItem(@RequestBody InventoryItem inventoryItem) {
+        return InventoryItemDTO.convertToDTO(inventoryItemService.update(inventoryItem.getId(), inventoryItem));
     }
 
     @DeleteMapping("deleteById")
